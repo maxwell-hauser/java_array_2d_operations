@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Temurin JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Compile
+        run: |
+          javac Array2DOperations.java TwoDArray.java
+
+      - name: Package JAR
+        run: |
+          jar --create --file java-array-2d-operations-CI.jar --main-class Array2DOperations Array2DOperations.class Array2DOperations$*.class TwoDArray.class
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-array-2d-operations-jar
+          path: java-array-2d-operations-CI.jar
+          if-no-files-found: error
