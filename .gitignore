@@ -17,3 +17,4 @@ bin/
 build/
 out/
 target/
+dependency-reduced-pom.xml

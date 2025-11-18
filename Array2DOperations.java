@@ -1,6 +1,3 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.JOptionPane;
 
 public class Array2DOperations extends Frame implements ActionListener
 {
